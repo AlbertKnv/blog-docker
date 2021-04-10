@@ -1,0 +1,5 @@
+.gitconfig
+__pycache__
+venv-app3
+.vscode
+*sqlite
