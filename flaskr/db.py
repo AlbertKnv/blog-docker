@@ -1,4 +1,5 @@
-import sqlite3
+import os
+# import sqlite3
 import psycopg2
 
 import click
@@ -8,12 +9,9 @@ from flask.cli import with_appcontext
 
 def get_db():
     if 'db' not in g:
-        g.db = psycopg2.connect('dbname=postgres user=postgres')
-        # g.db = sqlite3.connect(
-        #     current_app.config['DATABASE'],
-        #     detect_types=sqlite3.PARSE_DECLTYPES
-        # )
-        # g.db.row_factory = sqlite3.Row
+        g.db = psycopg2.connect(
+            f"dbname={os.environ['POSTGRES_DB']} user={os.environ['POSTGRES_USER']} password={os.environ['POSTGRES_PASSWORD']} host=db"
+        )
 
     return g.db
 
